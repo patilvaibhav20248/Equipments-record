@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="AssetPulse - Real-time IT Asset, Computer, Printer, and Projector Inventory Tracker with Department Analytics and Excel Integration.">
+  <title>AssetPulse | IT Equipment & Departmental Asset Manager</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'><path d='M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z'/></svg>">
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="top-navbar">
+      <div class="brand-section">
+        <div class="brand-icon-wrapper" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Dead Stock &amp; Equipment Register</h1>
+          <p>Central Computer, Printer &amp; Projector Hardware Inventory System</p>
+        </div>
+      </div>
+
+      <div class="navbar-actions">
+        <!-- Excel Global Actions -->
+        <button id="btnExportExcel" class="btn btn-excel"
+          title="Download comprehensive Excel report with department statistics">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Export Excel Report
+        </button>
+
+        <button id="btnImportExcel" class="btn btn-secondary" title="Bulk import assets from an existing Excel sheet">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Import Excel
+        </button>
+
+        <button id="btnDownloadTemplate" class="btn btn-secondary btn-sm"
+          title="Download Excel template for bulk adding assets">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+          Template
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="btnThemeToggle" class="btn btn-icon-only" aria-label="Toggle light/dark theme"
+          title="Toggle Light/Dark Theme">
+          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- PRIMARY NAVIGATION TABS (MATCHING USER SCREENSHOT) -->
+    <nav class="college-nav-tabs" id="collegeNavTabs" aria-label="Main Inventory Sections">
+      <button class="nav-tab-btn active" data-nav-tab="computers">
+        <span>💻 संगणक (PC - WDN)</span>
+        <span class="tab-badge" id="tabPcBadge">0</span>
+      </button>
+
+      <button class="nav-tab-btn" data-nav-tab="printers">
+        <span>🖨️ प्रिंटर (Printers)</span>
+        <span class="tab-badge" id="tabPrinterBadge">0</span>
+      </button>
+
+      <button class="nav-tab-btn" data-nav-tab="projectors">
+        <span>📽️ प्रोजेक्टर (Projectors)</span>
+        <span class="tab-badge" id="tabProjectorBadge">0</span>
+      </button>
+
+      <button class="nav-tab-btn tab-highlight" data-nav-tab="add-item" id="navTabAddItem">
+        <span>➕ नवीन नोंदणी (Add Item)</span>
+      </button>
+
+      <button class="nav-tab-btn" data-nav-tab="excel-import" id="navTabExcelImport">
+        <span>📥 एक्सेल इम्पोर्ट (Excel Import)</span>
+      </button>
+    </nav>
+
+    <!-- =========================================================================
+         INLINE ADD EQUIPMENT FORM PANEL (MATCHING USER SCREENSHOT EXACTLY)
+         ========================================================================= -->
+    <section class="add-equipment-panel" id="inlineAddEquipmentPanel" style="display: none;">
+      <div class="add-equipment-header">
+        <div>
+          <span
+            style="font-size: 0.8rem; font-weight: 700; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.05em;">(New
+            Asset)</span>
+          <h3 style="margin-top: 2px;">➕ नवीन उपकरण नोंदणी (Equipment Registration)</h3>
+        </div>
+
+        <!-- Type Selector Dropdown Matching Image -->
+        <div class="type-selector-bar">
+          <label for="inlineAssetType">Type):</label>
+          <select id="inlineAssetType" class="form-control" style="font-weight: 700; width: auto; min-width: 290px;">
+            <option value="Computer" selected>💻 संगणक / लॅपटॉप (PC - WDN Sheet)</option>
+            <option value="Printer">🖨️ प्रिंटर (Printers)</option>
+            <option value="Projector">📽️ प्रोजेक्टर (Projectors)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- COMPUTER / PC REGISTRATION FORM (4-COLUMN GRID FROM SCREENSHOT) -->
+      <form id="inlinePcForm" class="inline-asset-form">
+        <div class="inline-form-grid-4">
+          <!-- Column 1 -->
+          <div class="inline-form-group">
+            <label for="inlineDeadStock">Dead Stock Register Number <span class="required-star">*</span></label>
+            <input type="text" id="inlineDeadStock" placeholder="उदा. WCS/Comp./Deptt.(B.C.S. PC-23)/357" required>
+          </div>
+
+          <!-- Column 2 -->
+          <div class="inline-form-group">
+            <label for="inlineMake">Make (कंपनी) <span class="required-star">*</span></label>
+            <input type="text" id="inlineMake" placeholder="उदा. Acer, HP, Lenovo, Dell" required>
+          </div>
+
+          <!-- Column 3 -->
+          <div class="inline-form-group">
+            <label for="inlineDeviceType">Type</label>
+            <select id="inlineDeviceType">
+              <option value="Desktop" selected>Desktop (संगणक)</option>
+              <option value="Laptop">Laptop (लॅपटॉप)</option>
+              <option value="Server">Server</option>
+              <option value="All-in-One">All-in-One PC</option>
+            </select>
+          </div>
+
+          <!-- Column 4 -->
+          <div class="inline-form-group">
+            <label for="inlineCpu">C.P.U. (Processor)</label>
+            <input type="text" id="inlineCpu" placeholder="उदा. INTEL i5, Core 2 Duo, Ryzen 5">
+          </div>
+
+          <!-- Row 2 -->
+          <div class="inline-form-group">
+            <label for="inlineDepartment">Department (विभाग) <span class="required-star">*</span></label>
+            <select id="inlineDepartment" required></select>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineMotherboard">Motherboard</label>
+            <input type="text" id="inlineMotherboard" placeholder="उदा. ASROCK H510-HDV, ASUS H110M-CS">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineRam">RAM (स्मृती)</label>
+            <input type="text" id="inlineRam" placeholder="उदा. 8GB, 16GB, 4GB DDR4">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineHdd">HDD</label>
+            <input type="text" id="inlineHdd" placeholder="उदा. 1TB WD, 500 GB">
+          </div>
+
+          <!-- Row 3 -->
+          <div class="inline-form-group">
+            <label for="inlineSsd">SSD</label>
+            <input type="text" id="inlineSsd" placeholder="उदा. EVM 256 GB, No">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineOs">Operating System (O. S.)</label>
+            <input type="text" id="inlineOs" placeholder="उदा. Windows 11 Home Single Language">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineMonitor">Monitor</label>
+            <input type="text" id="inlineMonitor" placeholder="उदा. Acer, Dell, LG">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineKeyboardMouse">Keyboard &amp; Mouse</label>
+            <input type="text" id="inlineKeyboardMouse" placeholder="उदा. Acer / HP">
+          </div>
+
+          <!-- Row 4 -->
+          <div class="inline-form-group">
+            <label for="inlineStatus">Status <span class="required-star">*</span></label>
+            <select id="inlineStatus" required>
+              <option value="Working" selected>Working (चालू)</option>
+              <option value="Not Working">Not Working (बंद / बिघाड)</option>
+            </select>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineRemark">Remark / Formating</label>
+            <input type="text" id="inlineRemark" placeholder="उदा. Windows 11 Formatted">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineLocation">Location / Lab</label>
+            <input type="text" id="inlineLocation" placeholder="उदा. BCS Lab, Room 12">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineUser">Assigned User / IP</label>
+            <input type="text" id="inlineUser" placeholder="उदा. Lab Students / 192.168.1.50">
+          </div>
+        </div>
+
+        <!-- Optional Excel / Drive Attachment -->
+        <div class="inline-attachment-strip"
+          style="margin: 14px 0; padding: 12px 14px; background: rgba(16, 124, 65, 0.08); border: 1px dashed rgba(16, 124, 65, 0.4); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <div
+              style="font-size: 0.84rem; font-weight: 700; color: #107c41; display: flex; align-items: center; gap: 6px;">
+              <span>📊</span> सोबत एक्सेल किंवा ड्राइव्ह लिंक जोडा (Attach Audit Excel / Drive Link - Optional)
+            </div>
+            <div id="inlinePcAttachmentLabel" style="font-size: 0.77rem; color: var(--text-muted); margin-top: 2px;">
+              कोणतीही फाईल निवडलेली नाही (No file selected)
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <input type="file" id="inlinePcFileInput" accept=".xlsx, .xls, .csv" style="display: none;">
+            <button type="button" id="btnBrowseInlinePcFile" class="btn btn-sm btn-excel"
+              style="font-size: 0.76rem; padding: 5px 12px;">
+              📁 एक्सेल फाइल जोडा (.xlsx)
+            </button>
+            <button type="button" id="btnDriveInlinePc" class="btn btn-sm btn-secondary"
+              style="font-size: 0.76rem; padding: 5px 12px;">
+              ☁️ ड्राइव्ह लिंक
+            </button>
+            <button type="button" id="btnRemoveInlinePcAtt" class="btn btn-sm btn-danger-outline"
+              style="display: none; font-size: 0.76rem; padding: 5px 10px;">
+              🗑️ फाइल हटवा (Remove)
+            </button>
+          </div>
+        </div>
+
+        <div class="inline-form-actions">
+          <button type="submit" class="btn-save-pc" id="btnSavePcSubmit">
+            💾 जतन करा (Save PC)
+          </button>
+          <button type="button" class="btn btn-secondary" id="btnCancelInlineAdd">
+            रद्द करा (Cancel)
+          </button>
+          <span style="font-size: 0.8rem; color: var(--text-muted); margin-left: auto;">
+            नोंदणी पूर्ण झाल्यावर आपोआप यादीमध्ये दिसेल.
+          </span>
+        </div>
+      </form>
+
+      <!-- PRINTER REGISTRATION FORM -->
+      <form id="inlinePrinterForm" class="inline-asset-form" style="display: none;">
+        <div class="inline-form-grid-4">
+          <div class="inline-form-group">
+            <label for="inlinePrinterAssetNo">Printer Asset number <span class="required-star">*</span></label>
+            <input type="text" id="inlinePrinterAssetNo" placeholder="उदा. WDN/BCS/18-19/No 9" required>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlinePrinterDept">Department (विभाग) <span class="required-star">*</span></label>
+            <select id="inlinePrinterDept" required></select>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlinePrinterMake">Make (कंपनी / मॉडेल) <span class="required-star">*</span></label>
+            <input type="text" id="inlinePrinterMake" placeholder="उदा. Canon LBP 2900 B, HP Laserjet 1020" required>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlinePrinterType">Type (प्रकार)</label>
+            <select id="inlinePrinterType">
+              <option value="Laserjet" selected>Laserjet (लेझर)</option>
+              <option value="InkJet">InkJet</option>
+              <option value="Thermal printer">Thermal printer</option>
+              <option value="Multifunction printer">Multifunction printer</option>
+            </select>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlinePrinterPort">PORT (कनेक्शन)</label>
+            <select id="inlinePrinterPort">
+              <option value="USB" selected>USB</option>
+              <option value="Network / LAN">Network / LAN</option>
+              <option value="Wireless / WiFi">Wireless / WiFi</option>
+            </select>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlinePrinterStatus">Status <span class="required-star">*</span></label>
+            <select id="inlinePrinterStatus" required>
+              <option value="Working" selected>Working (चालू)</option>
+              <option value="Not Working">Not Working (बंद / बिघाड)</option>
+            </select>
+          </div>
+
+          <div class="inline-form-group" style="grid-column: span 2;">
+            <label for="inlinePrinterRemark">Remark / टिप्पणी</label>
+            <input type="text" id="inlinePrinterRemark" placeholder="उदा. Working, Tonner Refill, Drum issue">
+          </div>
+        </div>
+
+        <div class="inline-form-actions">
+          <button type="submit" class="btn-save-pc" id="btnSavePrinterSubmit">
+            💾 जतन करा (Save Printer)
+          </button>
+          <button type="button" class="btn btn-secondary btn-cancel-inline">
+            रद्द करा (Cancel)
+          </button>
+        </div>
+      </form>
+
+      <!-- PROJECTOR REGISTRATION FORM -->
+      <form id="inlineProjectorForm" class="inline-asset-form" style="display: none;">
+        <div class="inline-form-grid-4">
+          <div class="inline-form-group">
+            <label for="inlineProjectorSerial">Serial Number number <span class="required-star">*</span></label>
+            <input type="text" id="inlineProjectorSerial" placeholder="उदा. PDF8P01452000" required>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineProjectorDept">Department (विभाग) <span class="required-star">*</span></label>
+            <select id="inlineProjectorDept" required></select>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineProjectorMake">Make (कंपनी / मॉडेल) <span class="required-star">*</span></label>
+            <input type="text" id="inlineProjectorMake" placeholder="उदा. EW 600 BENQ DLP, Dell, Epson" required>
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineProjectorLocation">Class Room / Location (खोली)</label>
+            <input type="text" id="inlineProjectorLocation" placeholder="उदा. Class Room No 8, Velankar Hall">
+          </div>
+
+          <div class="inline-form-group">
+            <label for="inlineProjectorStatus">Status <span class="required-star">*</span></label>
+            <select id="inlineProjectorStatus" required>
+              <option value="Working" selected>Working (चालू)</option>
+              <option value="Not Working">Not Working (बंद / बिघाड)</option>
+            </select>
+          </div>
+
+          <div class="inline-form-group" style="grid-column: span 3;">
+            <label for="inlineProjectorRemark">Remark (टिप्पणी / शिफ्ट तपशील)</label>
+            <input type="text" id="inlineProjectorRemark" placeholder="उदा. Shift to Language Lab, Display Issue">
+          </div>
+        </div>
+
+        <div class="inline-form-actions">
+          <button type="submit" class="btn-save-pc" id="btnSaveProjectorSubmit">
+            💾 जतन करा (Save Projector)
+          </button>
+          <button type="button" class="btn btn-secondary btn-cancel-inline">
+            रद्द करा (Cancel)
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- KPI CARDS SUMMARY ROW -->
+    <section class="kpi-grid" aria-label="Overview KPI Statistics">
+
+      <!-- Total Devices -->
+      <div class="kpi-card" data-kpi-filter="ALL" title="Click to view all college equipment">
+        <div class="kpi-header">
+          <span class="kpi-title">Total Equipment</span>
+          <div class="kpi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-value-row">
+          <div class="kpi-number" id="kpiTotalCount">0</div>
+          <div class="kpi-subtext">tracked assets</div>
+        </div>
+        <div class="kpi-progress-bar">
+          <div class="kpi-progress-fill-working" id="kpiProgressWorking" style="width: 75%;"></div>
+          <div class="kpi-progress-fill-faulty" id="kpiProgressFaulty" style="width: 25%;"></div>
+        </div>
+        <div class="kpi-breakdown-row">
+          <span>Working: <b id="kpiTotalWorking">0</b></span>
+          <span>Faulty: <b id="kpiTotalFaulty">0</b></span>
+        </div>
+        <span class="click-hint">👆 Click cursor to display all equipment</span>
+      </div>
+
+      <!-- Computers KPI -->
+      <div class="kpi-card" data-kpi-filter="Computer" title="Click to display all computers across all courses">
+        <div class="kpi-header">
+          <span class="kpi-title">Computers / PCs</span>
+          <div class="kpi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-value-row">
+          <div class="kpi-number" id="kpiPcCount">0</div>
+          <div class="kpi-subtext" id="kpiPcHealth">0% operational</div>
+        </div>
+        <div class="kpi-breakdown-row">
+          <span style="color: var(--status-working-text);">Working: <b id="kpiPcWorking">0</b></span>
+          <span style="color: var(--status-faulty-text);">Not Working: <b id="kpiPcFaulty">0</b></span>
+        </div>
+        <span class="click-hint">👆 Click cursor to display all Computers</span>
+      </div>
+
+      <!-- Printers KPI -->
+      <div class="kpi-card" data-kpi-filter="Printer" title="Click to display all printers">
+        <div class="kpi-header">
+          <span class="kpi-title">Printers &amp; Copiers</span>
+          <div class="kpi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-value-row">
+          <div class="kpi-number" id="kpiPrinterCount">0</div>
+          <div class="kpi-subtext" id="kpiPrinterHealth">0% operational</div>
+        </div>
+        <div class="kpi-breakdown-row">
+          <span style="color: var(--status-working-text);">Working: <b id="kpiPrinterWorking">0</b></span>
+          <span style="color: var(--status-faulty-text);">Not Working: <b id="kpiPrinterFaulty">0</b></span>
+        </div>
+        <span class="click-hint">👆 Click cursor to display all Printers</span>
+      </div>
+
+      <!-- Projectors KPI -->
+      <div class="kpi-card" data-kpi-filter="Projector" title="Click to display all projectors">
+        <div class="kpi-header">
+          <span class="kpi-title">Projectors</span>
+          <div class="kpi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 7h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"></path>
+              <circle cx="16" cy="12" r="2"></circle>
+              <line x1="7" y1="17" x2="6" y2="20"></line>
+              <line x1="17" y1="17" x2="18" y2="20"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-value-row">
+          <div class="kpi-number" id="kpiProjectorCount">0</div>
+          <div class="kpi-subtext" id="kpiProjectorHealth">0% operational</div>
+        </div>
+        <div class="kpi-breakdown-row">
+          <span style="color: var(--status-working-text);">Working: <b id="kpiProjectorWorking">0</b></span>
+          <span style="color: var(--status-faulty-text);">Not Working: <b id="kpiProjectorFaulty">0</b></span>
+        </div>
+        <span class="click-hint">👆 Click cursor to display all Projectors</span>
+      </div>
+
+      <!-- Attached Excel Files KPI -->
+      <div class="kpi-card card-excel" data-kpi-filter="Excel" title="Click to display assets with Excel audit sheets">
+        <div class="kpi-header">
+          <span class="kpi-title">Excel Audit Files</span>
+          <div class="kpi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="8" y1="13" x2="16" y2="13"></line>
+              <line x1="8" y1="17" x2="16" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-value-row">
+          <div class="kpi-number" id="kpiExcelCount">0</div>
+          <div class="kpi-subtext">attached to assets</div>
+        </div>
+        <div class="kpi-breakdown-row">
+          <span>PCs with Excel: <b id="kpiPcsWithExcel">0</b></span>
+          <span style="color: #34d399;">Ready for Audit</span>
+        </div>
+        <span class="click-hint">👆 Click cursor to display Excel files</span>
+      </div>
+
+    </section>
+
+    <!-- COURSE / DEPARTMENT QUICK SELECTOR (CHOOSE ANY COURSE/DEPT TO DISPLAY ALL COMPUTERS) -->
+    <section class="course-chooser-card" id="courseChooserSection" aria-label="Course and Department Selector">
+      <div class="course-chooser-header">
+        <div class="course-chooser-title">
+          <span style="font-size: 1.25rem;">🎓</span>
+          <span>Click a Course / Department to display all computers &amp; equipment:</span>
+          <span class="badge-counter" id="courseChooserCount">All (580 Assets)</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <input type="text" id="courseFilterSearch" class="form-control form-control-sm"
+            placeholder="🔍 Search course..." style="font-size: 0.82rem; padding: 5px 12px; width: 170px;">
+          <button id="btnToggleDeptMatrix" class="btn btn-secondary btn-sm" title="Toggle full 60 departments matrix">
+            📁 Browse All 60 Depts
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Course Chips Row -->
+      <div class="course-chips-scroll" id="quickCourseChips">
+        <!-- Dynamically rendered course chips: BCS, B.Sc IT, BSc CS, MSc CS, Jr IT Lab, Maths, Office, etc. -->
+      </div>
+    </section>
+
+    <!-- DEPARTMENT OVERVIEW & CHART GRID (COLLAPSIBLE / EXPANDABLE) -->
+    <section class="analytics-grid" id="analyticsGridSection" style="display: none;">
+      <!-- Department Status Matrix -->
+      <div class="analytics-card">
+        <div class="card-title-row">
+          <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            All 60 Departments (Click any card to view equipment)
+          </h2>
+          <span class="badge-counter" id="activeFilterBadge">Showing All</span>
+        </div>
+        <div class="dept-matrix-grid" id="departmentMatrixContainer"
+          style="max-height: 380px; overflow-y: auto; padding-right: 4px;">
+          <!-- Dynamically populated department cards -->
+        </div>
+      </div>
+
+      <!-- Live Chart -->
+      <div class="analytics-card">
+        <div class="card-title-row">
+          <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            Working vs Faulty Ratio
+          </h2>
+          <button id="btnToggleChartType" class="btn btn-secondary btn-sm"
+            title="Toggle between Bar and Doughnut chart">
+            Switch View
+          </button>
+        </div>
+        <div style="position: relative; height: 240px; width: 100%;">
+          <canvas id="statusChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTORY TOOLBAR & FILTERS -->
+    <section class="table-toolbar-container" id="inventorySection" aria-label="Inventory controls and filters">
+
+      <!-- Active Filter Banner (Appears when filtering by Course or Type) -->
+      <div id="activeFilterBanner" class="active-filter-banner" style="display: none;">
+        <div class="banner-info">
+          <span style="font-size: 1.3rem;">🎯</span>
+          <span id="bannerText">Displaying all computers and equipment for <strong>Course</strong></span>
+        </div>
+        <button id="btnClearActiveBanner" class="btn btn-secondary btn-sm"
+          style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2);">
+          ✕ Show All Equipment (Reset)
+        </button>
+      </div>
+
+      <div class="toolbar-upper-row">
+        <!-- Search bar -->
+        <div class="search-wrapper">
+          <svg class="search-icon-pos" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="search-input"
+            placeholder="Search by Asset ID, Model, CPU (i5, Ryzen), RAM, OS, or Status...">
+        </div>
+
+        <!-- Quick Controls -->
+        <div class="toolbar-controls-right">
+          <label for="deptSelectFilter" class="filter-label">Course / Dept:</label>
+          <select id="deptSelectFilter" class="form-control" style="width: auto; padding: 7px 12px; font-weight: 600;">
+            <option value="ALL">All Departments (580)</option>
+          </select>
+
+          <!-- View Switcher -->
+          <div class="view-mode-toggle" id="viewModeToggle">
+            <button class="view-btn active" data-view="table" title="Compact Table View">📋 Table</button>
+            <button class="view-btn" data-view="cards" title="Detailed Cards View">🎴 Spec Cards</button>
+          </div>
+
+          <button id="btnResetFilters" class="btn btn-secondary btn-sm" title="Reset all search filters">
+            Reset Filters
+          </button>
+          <button type="button" id="btnToolbarEraseData" class="btn btn-danger-outline btn-sm" style="font-weight: 700;"
+            title="Completely erase all inventory data and reset to 0">
+            🗑️ सर्व डेटा नष्ट करा (Erase Data - 0)
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filter-pills-row">
+        <span class="filter-label">Category:</span>
+        <button class="pill-btn active" data-filter-type="ALL">All Equipment (580)</button>
+        <button class="pill-btn" data-filter-type="Computer">🖥️ Computers (503)</button>
+        <button class="pill-btn" data-filter-type="Printer">🖨️ Printers (57)</button>
+        <button class="pill-btn" data-filter-type="Projector">📽️ Projectors (20)</button>
+
+        <span class="filter-label" style="margin-left: 12px;">Status:</span>
+        <button class="pill-btn active" data-filter-status="ALL">All Status</button>
+        <button class="pill-btn" data-filter-status="Working">🟢 Working</button>
+        <button class="pill-btn" data-filter-status="Not Working">🔴 Not Working / Faulty</button>
+
+        <span class="filter-label" style="margin-left: 12px;">Excel:</span>
+        <button class="pill-btn" data-filter-excel="true">📎 Has Excel Audit</button>
+
+        <span style="margin-left: auto; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
+          Showing: <b id="showingAssetsCount" style="color: #60a5fa;">580</b> items
+        </span>
+      </div>
+    </section>
+
+    <!-- ASSET INVENTORY TABLE & CARDS VIEW -->
+    <main class="table-wrapper" id="inventoryMainWrapper">
+      <!-- Table View -->
+      <div class="table-responsive" id="tableContainer">
+        <table class="asset-table" id="assetTable">
+          <thead>
+            <tr>
+              <th>Equipment / Asset ID</th>
+              <th>Department / Course</th>
+              <th>Assigned User / IP</th>
+              <th>Hardware Specifications</th>
+              <th>Operational Status</th>
+              <th>Excel Attachment</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="assetTableBody">
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Spec Cards View (Hidden by default, toggled via View Switcher) -->
+      <div id="assetCardsContainer" class="asset-cards-grid" style="display: none;">
+        <!-- Dynamically populated spec cards -->
+      </div>
+    </main>
+
+  </div> <!-- /app-container -->
+
+  <!-- =========================================================================
+       MODAL 1: SPREADSHEET PREVIEW FOR SPECIFIC PC / ASSET
+       ========================================================================= -->
+  <div id="excelModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="excelModalTitle">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3 id="excelModalTitle" style="display: flex; align-items: center; gap: 8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#107c41" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="8" y1="13" x2="16" y2="13"></line>
+            <line x1="8" y1="17" x2="16" y2="17"></line>
+          </svg>
+          <span>Spreadsheet Preview for <strong id="excelModalAssetName">AST-PC-101</strong></span>
+        </h3>
+        <button class="btn btn-icon-only modal-close-btn" data-close-modal="excelModal"
+          aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Target Device Brief Details -->
+        <div
+          style="background: var(--bg-tertiary); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 16px; border: 1px solid var(--border-color-light);">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">Asset Tag:</span>
+              <strong id="excelTargetAssetId" style="color: var(--accent-cyan); margin-left: 4px;">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">Department:</span>
+              <strong id="excelTargetDept" style="margin-left: 4px;">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">Assigned User:</span>
+              <strong id="excelTargetUser" style="margin-left: 4px;">-</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">Status:</span>
+              <span id="excelTargetStatus" class="status-badge working" style="margin-left: 4px;">Working</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- File Switcher Tabs (if device has multiple attached spreadsheets) -->
+        <div id="excelModalFileTabs" style="display: none; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;"></div>
+
+        <!-- Live Spreadsheet Preview Box -->
+        <div id="spreadsheetPreviewSection">
+          <div class="spreadsheet-preview-container" style="margin-top: 0;">
+            <div class="spreadsheet-header-bar"
+              style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: 1.15rem;">📊</span>
+                <strong style="font-size: 0.92rem; color: var(--text-main);">Spreadsheet Preview:</strong>
+                <span id="previewFileName" style="color: #60a5fa; font-weight: 700; margin-left: 4px;">audit.xlsx</span>
+                <span id="previewSheetCount" style="color: var(--text-muted); font-size: 0.75rem; margin-left: 6px;">(1
+                  Sheet)</span>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <!-- View Mode Switcher -->
+                <div class="spreadsheet-view-switcher" id="previewViewToggleGroup" style="display: inline-flex;">
+                  <button type="button" id="btnPreviewVerticalView" class="view-switch-btn active"
+                    title="तपशीलवार यादी (Parameter - Value Vertical View)">
+                    📋 तपशीलवार यादी (Vertical)
+                  </button>
+                  <button type="button" id="btnPreviewRawRowView" class="view-switch-btn"
+                    title="मूळ एक्सेल ओळ (Original Horizontal Excel Row)">
+                    📊 मूळ शीट ओळ (Sheet Row)
+                  </button>
+                </div>
+                <button type="button" id="btnDownloadCurrentPreview" class="btn btn-excel btn-sm"
+                  style="font-size: 0.78rem; padding: 5px 12px; display: inline-flex; align-items: center; gap: 5px;"
+                  title="Download Excel (.xlsx) file">
+                  ⬇️ Download Excel
+                </button>
+                <button type="button" id="btnDeleteCurrentPreview" class="btn btn-danger-outline btn-sm"
+                  style="font-size: 0.78rem; padding: 5px 12px; display: inline-flex; align-items: center; gap: 5px;"
+                  title="Delete this Excel file from equipment">
+                  🗑️ Delete File
+                </button>
+              </div>
+            </div>
+            <div class="spreadsheet-table-scroll" style="max-height: 480px;">
+              <table class="spreadsheet-grid" id="previewSpreadsheetTable">
+                <!-- Preview rows -->
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty state notice when no files exist -->
+        <div id="excelEmptyNotice"
+          style="display: none; padding: 40px 20px; text-align: center; background: var(--bg-tertiary); border-radius: var(--radius-md); border: 1px dashed var(--border-color);">
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">📊</div>
+          <h4 style="font-size: 1rem; margin-bottom: 4px; color: var(--text-main);">No Spreadsheet Attached</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">या उपकरणास कोणतीही एक्सेल ऑडिट शीट जोडलेली
+            नाही.</p>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="justify-content: flex-end;">
+        <button class="btn btn-secondary modal-close-btn" data-close-modal="excelModal">बंद करा (Close)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: ADD / EDIT ASSET FORM
+       ========================================================================= -->
+  <div id="assetModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="assetModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="assetModalTitle">Add New Equipment</h3>
+        <button class="btn btn-icon-only modal-close-btn" data-close-modal="assetModal"
+          aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="assetForm">
+        <div class="modal-body">
+          <input type="hidden" id="formAssetId" value="">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="formAssetType">Equipment Category *</label>
+              <select id="formAssetType" class="form-control" required>
+                <option value="Computer">🖥️ Computer / PC / Laptop</option>
+                <option value="Printer">🖨️ Printer / Copier</option>
+                <option value="Projector">📽️ Projector</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="formAssetTag">Asset ID / Tag *</label>
+              <input type="text" id="formAssetTag" class="form-control" placeholder="e.g. AST-PC-111" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formAssetName">Equipment Model / Name *</label>
+            <input type="text" id="formAssetName" class="form-control"
+              placeholder="e.g. Dell OptiPlex 7090 or HP LaserJet M608" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="formDepartment">Department *</label>
+              <select id="formDepartment" class="form-control" required>
+                <!-- Filled dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="formLocation">Location / Room / Desk</label>
+              <input type="text" id="formLocation" class="form-control" placeholder="e.g. Finance Wing / Desk 4">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="formAssignedUser">Assigned User / Team</label>
+              <input type="text" id="formAssignedUser" class="form-control" placeholder="e.g. John Doe or Shared IT">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="formIpAddress">IP Address (Optional)</label>
+              <input type="text" id="formIpAddress" class="form-control" placeholder="e.g. 192.168.1.55">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="formSerialNumber">Serial Number</label>
+              <input type="text" id="formSerialNumber" class="form-control" placeholder="e.g. SN-883921">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="formStatus">Operational Status *</label>
+              <select id="formStatus" class="form-control" required>
+                <option value="Working">🟢 Working / Operational</option>
+                <option value="Not Working">🔴 Not Working / Faulty</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="formSpecs">Technical Specifications</label>
+            <textarea id="formSpecs" class="form-control" rows="2"
+              placeholder="e.g. Intel Core i7, 32GB RAM, 1TB SSD, Windows 11"></textarea>
+          </div>
+
+          <!-- Conditional Fault Information -->
+          <div id="formFaultSection"
+            style="display: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); padding: 14px; border-radius: var(--radius-md); margin-top: 10px;">
+            <h4 style="color: #ef4444; font-size: 0.88rem; margin-bottom: 8px;">Fault &amp; Repair Details</h4>
+            <div class="form-group">
+              <label class="form-label" for="formFaultIssue">Issue / Malfunction Description *</label>
+              <input type="text" id="formFaultIssue" class="form-control"
+                placeholder="e.g. RAM failure, won't boot, drum leaking toner">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="formFaultPriority">Priority Level</label>
+                <select id="formFaultPriority" class="form-control">
+                  <option value="Low">Low</option>
+                  <option value="Medium" selected>Medium</option>
+                  <option value="High">High</option>
+                  <option value="Urgent">Urgent</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="formFaultTech">Assigned Technician / Vendor</label>
+                <input type="text" id="formFaultTech" class="form-control" placeholder="e.g. Alex Mercer">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary modal-close-btn" data-close-modal="assetModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveAsset">Save Equipment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: IMPORT & MANAGE EXCEL FILE
+       ========================================================================= -->
+  <div id="importModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="importModalTitle" style="display: flex; align-items: center; gap: 8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#107c41" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="8" y1="13" x2="16" y2="13"></line>
+            <line x1="8" y1="17" x2="16" y2="17"></line>
+          </svg>
+          <span>एक्सेल फाईल व्यवस्थापन (Import &amp; Manage Excel)</span>
+        </h3>
+        <button class="btn btn-icon-only modal-close-btn" data-close-modal="importModal"
+          aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 1. Currently Added Excel File & Delete Option -->
+        <div id="activeImportedFileSection"
+          style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(239, 68, 68, 0.45); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 2rem;">📊</span>
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <strong style="font-size: 0.95rem; color: var(--text-main);">सध्या जोडलेली फाईल (Current Added
+                    File):</strong>
+                  <span id="activeImportedFileNameBadge"
+                    style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-family: monospace; font-size: 0.82rem; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                    Revised_Inventory_wdn_updated_05-05-2026.xlsx
+                  </span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                  एकूण <strong id="activeImportedTotalCount" style="color: #60a5fa;">585</strong> उपकरणे (<span
+                    id="activeImportedComputersCount">503 संगणक</span>, <span id="activeImportedPrintersCount">62
+                    प्रिंटर्स</span>, <span id="activeImportedProjectorsCount">20 प्रोजेक्टर</span>) इन्व्हेंटरीमध्ये
+                  उपलब्ध आहेत.
+                </div>
+              </div>
+            </div>
+            <div>
+              <button type="button" id="btnDeleteAddedExcelAndEraseData" class="btn btn-danger"
+                style="background: #dc2626; color: #fff; font-weight: 700; padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(220, 38, 38, 0.4);"
+                title="Delete this Excel file and completely erase all inventory data">
+                🗑️ फाईल व सर्व डेटा डिलीट करा (Delete File &amp; Erase Data)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="noActiveImportedFileSection"
+          style="display: none; background: var(--bg-tertiary); border: 1px dashed var(--border-color); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.4rem;">ℹ️</span>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">
+                सध्या कोणतीही फाईल जोडलेली नाही (All Data is 0). खालील बटण वापरून नवीन एक्सेल फाईल जोडा.
+              </span>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm btn-restore-sample-trigger"
+              style="font-size: 0.76rem; font-weight: 700;">
+              🔄 सॅम्पल डेटा लोड करा (Restore Sample)
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Add / Choose New Excel File -->
+        <div style="margin-top: 10px;">
+          <h4
+            style="font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <span>➕</span> नवीन एक्सेल फाईल जोडा (Add Excel File)
+          </h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
+            नवीन एक्सेल फाईल (.xlsx, .xls, .csv) निवडा. फाईलमधील सर्व संगणक (Computers), प्रिंटर्स (Printers),
+            प्रोजेक्टर (Projectors) आणि कोर्सेस आपोआप इन्व्हेंटरीमध्ये जोडले जातील:
+          </p>
+
+          <input type="file" id="bulkImportFileInput" accept=".xlsx, .xls, .csv" style="display: none;">
+          <div id="bulkImportDropzone" class="excel-dropzone" tabindex="0" style="padding: 24px 16px;">
+            <div class="dropzone-icon" style="margin-bottom: 10px;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#107c41" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <div class="dropzone-text">
+              <h4 style="font-size: 0.98rem; margin-bottom: 4px;">Click to browse or Drag &amp; Drop Excel file (.xlsx,
+                .csv)</h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">Auto-detects: Computers,
+                Printers, Projectors &amp; Departments</p>
+              <button type="button" id="btnBrowseBulkExcel" class="btn btn-excel"
+                style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; padding: 8px 20px;">
+                📂 एक्सेल फाइल निवडा (Choose File to Add)
+              </button>
+            </div>
+          </div>
+
+          <!-- Staged file preview & Instant Confirm Button -->
+          <div id="bulkImportPreview"
+            style="display: none; margin-top: 16px; background: var(--bg-tertiary); padding: 14px; border-radius: var(--radius-md); border: 1px solid #107c41;">
+            <div
+              style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <strong style="color: #34d399; font-size: 0.95rem;">✅ फाईल वाचण्यात आली (File Loaded):</strong>
+                <span id="bulkPreviewFileName"
+                  style="font-size: 0.82rem; color: var(--text-main); margin-left: 6px; font-weight: 600;"></span>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <button type="button" id="btnConfirmStagedImportDirect" class="btn btn-excel"
+                  style="font-weight: 700; padding: 6px 16px; display: inline-flex; align-items: center; gap: 6px;">
+                  💾 ही फाईल आता जोडा (Add File Now)
+                </button>
+                <button type="button" id="btnCancelStagedImport" class="btn btn-sm btn-danger-outline"
+                  style="font-size: 0.76rem; padding: 4px 10px;">
+                  ❌ रद्द करा (Cancel)
+                </button>
+              </div>
+            </div>
+            <div
+              style="max-height: 180px; overflow-y: auto; background: var(--bg-primary); padding: 10px; border-radius: var(--radius-sm); font-size: 0.78rem;">
+              <ul id="bulkPreviewList"
+                style="padding-left: 18px; color: var(--text-muted); line-height: 1.6; margin: 0;"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="justify-content: space-between;">
+        <button class="btn btn-secondary modal-close-btn" data-close-modal="importModal">बंद करा (Close)</button>
+        <button id="btnConfirmBulkImport" class="btn btn-excel" disabled>💾 ही फाईल इन्व्हेंटरीमध्ये जोडा (Confirm &amp;
+          Add File)</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4: QUICK SPECS & HARDWARE DETAILS MODAL
+       ========================================================================= -->
+  <div id="specsQuickModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="specsQuickTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="specsQuickTitle" style="display: flex; align-items: center; gap: 8px;">
+          <span>🖥️</span>
+          <span id="quickModalDevName">Device Specifications</span>
+        </h3>
+        <button class="btn btn-icon-only modal-close-btn" data-close-modal="specsQuickModal"
+          aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body" id="specsQuickBody">
+        <!-- Dynamically rendered specifications grid -->
+      </div>
+      <div class="modal-footer" style="justify-content: space-between;">
+        <button id="btnQuickOpenExcel" class="btn btn-excel btn-sm">
+          📊 Open Audit Excel
+        </button>
+        <button class="btn btn-secondary modal-close-btn" data-close-modal="specsQuickModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- SCRIPTS -->
+  <script src="xlsx.full.min.js"></script>
+  <script src="chart.umd.min.js"></script>
+  <script src="sample_data.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1142 @@
+[
+  {
+    "department": "B.Sc IT",
+    "computers": {
+      "total": 49,
+      "working": 49,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 49
+  },
+  {
+    "department": "B.Sc IT + MSc CS",
+    "computers": {
+      "total": 22,
+      "working": 22,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 22
+  },
+  {
+    "department": "BCS",
+    "computers": {
+      "total": 29,
+      "working": 29,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 5,
+      "working": 5,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "totalEquipment": 36
+  },
+  {
+    "department": "BCS (HOD Office)",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "BCS (Stat & Electronics)",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "BCS Old PC",
+    "computers": {
+      "total": 20,
+      "working": 14,
+      "notWorking": 6
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 20
+  },
+  {
+    "department": "BSc CS",
+    "computers": {
+      "total": 24,
+      "working": 24,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 4,
+      "working": 4,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 28
+  },
+  {
+    "department": "BSc CS (Optional)",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "BSc CS Old PC",
+    "computers": {
+      "total": 9,
+      "working": 0,
+      "notWorking": 9
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 9
+  },
+  {
+    "department": "BSc Physics",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Biotechnology",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Botany",
+    "computers": {
+      "total": 3,
+      "working": 3,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 5
+  },
+  {
+    "department": "CAP Junior / Exam Section",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "Chemistry BSc",
+    "computers": {
+      "total": 3,
+      "working": 3,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 4
+  },
+  {
+    "department": "Chemistry MSc",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 4
+  },
+  {
+    "department": "Class Room No 10 (MSc CS)",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Class Room No 20 (BSc IT AS 6)",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Class Room No 8 (Language Lab)",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Class Room No 9 (BSc IT AS 7)",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Diploma in Yogshikshak",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "ERP",
+    "computers": {
+      "total": 4,
+      "working": 4,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 5
+  },
+  {
+    "department": "Economics",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 3
+  },
+  {
+    "department": "Electronics",
+    "computers": {
+      "total": 12,
+      "working": 11,
+      "notWorking": 1
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 14
+  },
+  {
+    "department": "English",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Exam 18 Room",
+    "computers": {
+      "total": 3,
+      "working": 3,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 4
+  },
+  {
+    "department": "Geography",
+    "computers": {
+      "total": 8,
+      "working": 6,
+      "notWorking": 2
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 9
+  },
+  {
+    "department": "Girls Hostel",
+    "computers": {
+      "total": 4,
+      "working": 4,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 4
+  },
+  {
+    "department": "Gymkhana",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "Hindi",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "History",
+    "computers": {
+      "total": 3,
+      "working": 3,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 3
+  },
+  {
+    "department": "Jr. IT Computer Lab",
+    "computers": {
+      "total": 33,
+      "working": 31,
+      "notWorking": 2
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 34
+  },
+  {
+    "department": "Jr. Old PC",
+    "computers": {
+      "total": 5,
+      "working": 0,
+      "notWorking": 5
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 5
+  },
+  {
+    "department": "Jr. Physics",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "Language Lab",
+    "computers": {
+      "total": 35,
+      "working": 28,
+      "notWorking": 7
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 0,
+      "notWorking": 1
+    },
+    "totalEquipment": 37
+  },
+  {
+    "department": "Library",
+    "computers": {
+      "total": 16,
+      "working": 13,
+      "notWorking": 3
+    },
+    "printers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 18
+  },
+  {
+    "department": "MSc CS",
+    "computers": {
+      "total": 20,
+      "working": 20,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 21
+  },
+  {
+    "department": "MSc Electronics",
+    "computers": {
+      "total": 6,
+      "working": 6,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 6
+  },
+  {
+    "department": "Marathi",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "Mathematics",
+    "computers": {
+      "total": 19,
+      "working": 16,
+      "notWorking": 3
+    },
+    "printers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 22
+  },
+  {
+    "department": "Microbiology",
+    "computers": {
+      "total": 5,
+      "working": 5,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 7
+  },
+  {
+    "department": "NAAC",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 4
+  },
+  {
+    "department": "NCC",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "NG Office",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 3
+  },
+  {
+    "department": "NSS",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Office",
+    "computers": {
+      "total": 17,
+      "working": 17,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 13,
+      "working": 13,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 30
+  },
+  {
+    "department": "PG Lab (Physics & Chemistry)",
+    "computers": {
+      "total": 14,
+      "working": 14,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 15
+  },
+  {
+    "department": "Physics BSc (Sr Wing)",
+    "computers": {
+      "total": 6,
+      "working": 5,
+      "notWorking": 1
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 7
+  },
+  {
+    "department": "Principal Sir Cabin",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "SRO",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "SRPD",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 2,
+      "working": 1,
+      "notWorking": 1
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 4
+  },
+  {
+    "department": "SRPD Old PC",
+    "computers": {
+      "total": 19,
+      "working": 0,
+      "notWorking": 19
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 19
+  },
+  {
+    "department": "Sangli Jilha Rojgar Srujan Kendra",
+    "computers": {
+      "total": 3,
+      "working": 3,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 3
+  },
+  {
+    "department": "Sanskrit",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "Sociology",
+    "computers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 1
+  },
+  {
+    "department": "Stat & Electronics",
+    "computers": {
+      "total": 12,
+      "working": 12,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 12
+  },
+  {
+    "department": "Statistics",
+    "computers": {
+      "total": 16,
+      "working": 12,
+      "notWorking": 4
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 18
+  },
+  {
+    "department": "Store Room",
+    "computers": {
+      "total": 2,
+      "working": 1,
+      "notWorking": 1
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 3
+  },
+  {
+    "department": "Velankar Hall",
+    "computers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 2,
+      "working": 1,
+      "notWorking": 1
+    },
+    "totalEquipment": 2
+  },
+  {
+    "department": "Website",
+    "computers": {
+      "total": 2,
+      "working": 2,
+      "notWorking": 0
+    },
+    "printers": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 0,
+      "working": 0,
+      "notWorking": 0
+    },
+    "totalEquipment": 3
+  },
+  {
+    "department": "Zoology",
+    "computers": {
+      "total": 4,
+      "working": 3,
+      "notWorking": 1
+    },
+    "printers": {
+      "total": 3,
+      "working": 3,
+      "notWorking": 0
+    },
+    "projectors": {
+      "total": 1,
+      "working": 1,
+      "notWorking": 0
+    },
+    "totalEquipment": 8
+  }
+]
